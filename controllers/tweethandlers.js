@@ -5,12 +5,11 @@ const tweets = require("../modals/tweetModal");
 
 const AllTweets = async (req, res) => {
   try {
-    const posts = await tweets.find({});
-    console.log(posts);
+    const posts = await tweets.find({}).sort({ createdAt: -1 });
     return res.status(200).json(posts);
   } catch (err) {
     console.log(err);
-    res.status(400).send("error");
+    res.status(400).json({ msg: "error" });
   }
 };
 
@@ -18,10 +17,14 @@ const AllTweets = async (req, res) => {
 
 const createTweet = async (req, res) => {
   const { name, tweet, likes, dislikes } = req.body;
+  console.log({ name, tweet, likes, dislikes });
   try {
+    console.log("started");
     const createdPost = await tweets.create({ name, tweet, likes, dislikes });
-    return res.status(200).json(createdPost);
+    const posts = await tweets.find({}).sort({ createdAt: -1 });
+    return res.status(200).json(posts);
   } catch (err) {
+    console.log(err);
     res.status(400).json({
       msg: "failed to get",
     });
@@ -36,7 +39,8 @@ const deleteTweet = async (req, res) => {
     try {
       console.log("started");
       const deletePost = await tweets.deleteOne({ _id: id });
-      return res.status(200).json(deletePost);
+      const posts = await tweets.find({}).sort({ createdAt: -1 });
+      return res.status(200).json(posts);
     } catch (e) {
       res.status(500).json({
         msg: "error happened",
