@@ -1,15 +1,15 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "backed for tweeter",
+  "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node server",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "phaneendra",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.2",

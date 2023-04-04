@@ -10,7 +10,6 @@ const {
 } = require("../controllers/tweethandlers");
 
 router.get("/", AllTweets);
-
 router.post("/", createTweet);
 router.delete("/:id", deleteTweet);
 router.delete("/", deleteAll);
