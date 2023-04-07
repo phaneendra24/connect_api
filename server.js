@@ -10,10 +10,26 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 app.use("/api/tweets", tweet);
+
+const server = require("http").createServer(app);
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "http://localhost:5173",
+  },
+});
+
+io.on("connection", (socket) => {
+  console.log("socket  :", socket.id);
+  socket.on("foo", (payload) => {
+    console.log(payload);
+    io.emit("foo", payload);
+  });
+});
+
 mongoose
   .connect(process.env.DATABASE_URI)
   .then(() => {
-    app.listen(process.env.PORT, () => {
+    server.listen(process.env.PORT, () => {
       console.log("DB connected and listening at port", process.env.PORT);
     });
   })
