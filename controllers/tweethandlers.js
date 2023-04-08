@@ -17,9 +17,7 @@ const AllTweets = async (req, res) => {
 
 const createTweet = async (req, res) => {
   const { name, tweet, likes, dislikes } = req.body;
-  console.log({ name, tweet, likes, dislikes });
   try {
-    console.log("started");
     const createdPost = await tweets.create({ name, tweet, likes, dislikes });
     const posts = await tweets.find({}).sort({ createdAt: -1 });
     return res.status(200).json(posts);

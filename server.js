@@ -14,15 +14,16 @@ app.use("/api/tweets", tweet);
 const server = require("http").createServer(app);
 const io = require("socket.io")(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: [
+      "http://localhost:5173",
+      "connect-671vvuoa6-phaneendra24.vercel.app",
+    ],
   },
 });
 
 io.on("connection", (socket) => {
-  console.log("socket  :", socket.id);
-  socket.on("foo", (payload) => {
-    console.log(payload);
-    io.emit("foo", payload);
+  socket.on("tweets", (payload) => {
+    io.emit("tweets", payload);
   });
 });
 
