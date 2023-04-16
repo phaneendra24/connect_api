@@ -32,6 +32,7 @@ const createTweet = async (req, res) => {
 // delete tweet
 
 const deleteTweet = async (req, res) => {
+  console.log("hi");
   const { id } = req.params;
   if (mongoose.Types.ObjectId.isValid(id)) {
     try {
