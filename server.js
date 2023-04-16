@@ -14,7 +14,7 @@ app.use("/api/tweets", tweet);
 const server = require("http").createServer(app);
 const io = require("socket.io")(server, {
   cors: {
-    origin: ["https://connect-ruddy.vercel.app/"],
+    origin: "https://connect-ruddy.vercel.app/",
   },
 });
 
