@@ -20,6 +20,7 @@ const tweetSchema = new Schema(
       type: Number,
       required: true,
     },
+    time: { type: Date, default: Date.now },
   },
   { timestamps: true }
 );
